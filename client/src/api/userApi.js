@@ -2,9 +2,8 @@ import axios from "axios";
 
 const apiService = axios.create({
   baseURL:
-    import.meta.env.VITE_ENV === "PROD"
-      ? `${import.meta.env.VITE_API_URL_PROD}/api`
-      : "http://localhost:3000/api",
+    "https://one-percent-task-server.vercel.app/api" ||
+    "http://localhost:3000/api",
 });
 
 export const registerApi = async (payload) => {
