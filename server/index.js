@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3001;
 // Specify allowed origins based on the environment
 const allowedOrigins =
   process.env.NODE_ENV === "production"
-    ? ["https://your-prod-domain.com"]
+    ? ["https://one-percent-task-client.vercel.app"]
     : [`http://localhost:5173`];
 
 app.use(
