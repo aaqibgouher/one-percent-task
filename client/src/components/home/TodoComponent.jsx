@@ -119,15 +119,13 @@ const TodoComponent = () => {
   };
 
   useEffect(() => {
-    getTodos();
-  }, []);
-
-  useEffect(() => {
     setTodos(todosState);
   }, [todosState]);
 
   useEffect(() => {
-    applyFilter();
+    if (priority || sortBy || sortOrder) {
+      applyFilter();
+    }
   }, [priority, sortBy, sortOrder]);
 
   return (
