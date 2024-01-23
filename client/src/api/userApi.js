@@ -2,7 +2,9 @@ import axios from "axios";
 
 const apiService = axios.create({
   baseURL:
-    "https://one-percent-task-server.vercel.app" || "http://localhost:3000",
+    import.meta.env.VITE_ENV === "PROD"
+      ? import.meta.env.VITE_API_URL_PROD
+      : "http://localhost:3000",
 });
 
 export const registerApi = async (payload) => {
@@ -22,6 +24,7 @@ export const registerApi = async (payload) => {
 
 export const loginApi = async (payload) => {
   try {
+    console.log(import.meta.env.VITE_ENV, "process");
     const res = await apiService.post("/api/auth/login", payload);
     console.log(res, "from res");
 
