@@ -32,7 +32,9 @@ const isAuthenticated = async (req, res, next) => {
     // call next
     next();
   } catch (error) {
-    console.log(error, "from is authenticated ");
+    console.log("called from", 5);
+    console.log(error?.name, "from is authenticated ");
+    if (error?.name === "JsonWebTokenError") error = error?.message;
     return res.json({ status: 401, error });
   }
 };
