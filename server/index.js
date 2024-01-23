@@ -8,19 +8,7 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Specify allowed origins based on the environment
-const allowedOrigins =
-  process.env.NODE_ENV === "production"
-    ? ["https://one-percent-task-client.vercel.app"]
-    : [`http://localhost:5173`];
-
-app.use(
-  cors({
-    origin: allowedOrigins,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-  })
-);
+app.use(cors());
 app.use(express.json());
 app.use("/api", router);
 

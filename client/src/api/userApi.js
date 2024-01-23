@@ -24,7 +24,6 @@ export const registerApi = async (payload) => {
 
 export const loginApi = async (payload) => {
   try {
-    console.log(import.meta.env.VITE_ENV, "process");
     const res = await apiService.post("/auth/login", payload);
     console.log(res, "from res");
 
