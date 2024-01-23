@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import HomeComponent from "../components/home/HomeComponent";
 import DashboardLayout from "../layouts/HomeLayout";

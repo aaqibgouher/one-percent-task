@@ -1,9 +1,7 @@
 import axios from "axios";
 
 const apiService = axios.create({
-  baseURL:
-    "https://one-percent-task-server.vercel.app/api" ||
-    "http://localhost:3000/api",
+  baseURL: "https://one-percent-task-server.vercel.app/api",
 });
 
 export const registerApi = async (payload) => {
