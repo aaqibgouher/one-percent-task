@@ -2,14 +2,12 @@ import axios from "axios";
 
 const apiService = axios.create({
   baseURL:
-    import.meta.env.VITE_ENV === "PROD"
-      ? import.meta.env.VITE_API_URL_PROD
-      : "http://localhost:3000",
+    import.meta.env.VITE_ENV === "PROD" ? "/api" : "http://localhost:3000",
 });
 
 export const registerApi = async (payload) => {
   try {
-    const res = await apiService.post("/api/auth/register", payload);
+    const res = await apiService.post("/auth/register", payload);
     console.log(res, "from res");
 
     if (res.hasOwnProperty("status") && res.status !== 200)
@@ -25,7 +23,7 @@ export const registerApi = async (payload) => {
 export const loginApi = async (payload) => {
   try {
     console.log(import.meta.env.VITE_ENV, "process");
-    const res = await apiService.post("/api/auth/login", payload);
+    const res = await apiService.post("/auth/login", payload);
     console.log(res, "from res");
 
     if (res.hasOwnProperty("status") && res.status !== 200)
@@ -40,7 +38,7 @@ export const loginApi = async (payload) => {
 
 export const logoutApi = async () => {
   try {
-    const res = await apiService.get("/api/auth/logout", {
+    const res = await apiService.get("/auth/logout", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -60,7 +58,7 @@ export const logoutApi = async () => {
 export const getMeApi = async () => {
   try {
     console.log("from get me api");
-    const res = await apiService.get("/api/auth/me", {
+    const res = await apiService.get("/auth/me", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -80,7 +78,7 @@ export const getMeApi = async () => {
 export const getStatsApi = async () => {
   try {
     console.log("from get me api");
-    const res = await apiService.get("/api/todos/stats", {
+    const res = await apiService.get("/todos/stats", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -102,7 +100,7 @@ export const getTodosApi = async (payload = {}) => {
     console.log("from get me api", payload, "payload");
     const { priority, sortBy, sortOrder, ...restPayload } = payload;
 
-    let apiUrl = "/api/todos";
+    let apiUrl = "/todos";
 
     // Append query parameters if available
     if (priority && priority !== "ALL") {
@@ -139,7 +137,7 @@ export const getTodosApi = async (payload = {}) => {
 export const addTodoApi = async (payload) => {
   try {
     console.log("from get me api");
-    const res = await apiService.post("/api/todos", payload, {
+    const res = await apiService.post("/todos", payload, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -159,7 +157,7 @@ export const addTodoApi = async (payload) => {
 export const deleteTodoApi = async (payload) => {
   try {
     console.log("from get me api");
-    const res = await apiService.delete(`/api/todos/${payload}`, {
+    const res = await apiService.delete(`/todos/${payload}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -179,15 +177,11 @@ export const deleteTodoApi = async (payload) => {
 export const editTodoApi = async (payload) => {
   try {
     console.log("from get me api");
-    const res = await apiService.patch(
-      `/api/todos/${payload.todoId}`,
-      payload,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
+    const res = await apiService.patch(`/todos/${payload.todoId}`, payload, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     console.log(res, "from res");
 
     if (res.hasOwnProperty("status") && res.status !== 200)
